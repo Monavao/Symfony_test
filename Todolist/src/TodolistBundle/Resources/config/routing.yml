@@ -1,0 +1,19 @@
+welcome:
+  path: /
+  defaults: { _controller: TodolistBundle:Default:welcome }
+
+todolist_list:
+    path:     todo/list
+    defaults: { _controller: TodolistBundle:Todo:list }
+
+todolist_detail:
+    path:     todo/details/{id}
+    defaults: { _controller: TodolistBundle:Todo:details }
+
+todolist_create:
+    path:     todo/create
+    defaults: { _controller: TodolistBundle:Todo:create }
+
+todolist_edit:
+    path:     todo/edit/{id}
+    defaults: { _controller: TodolistBundle:Todo:edit }

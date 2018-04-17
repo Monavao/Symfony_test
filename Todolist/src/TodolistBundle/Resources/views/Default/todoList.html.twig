@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h2>Todos</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Todo</th>
+				<th>Due date</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Todo</th>
+				<th>Due date</th>
+				<th><a href="#" class="btn btn-info">View</a>
+				<a href="#" class="btn btn-success">Edit</a>
+				<a href="#" class="btn btn-danger">Delete</a></th>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
