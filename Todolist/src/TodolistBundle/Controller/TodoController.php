@@ -4,11 +4,14 @@ namespace TodolistBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use TodolistBundle\Entity\Todos;
 
 class TodoController extends Controller
 {
 	public function listAction()
 	{
+		$em = $this->getDoctrine()->getRepository('TodolistBundle:Todos')->findAll();
+
 		return $this->render('TodolistBundle:Default:todoList.html.twig');
 	}
 

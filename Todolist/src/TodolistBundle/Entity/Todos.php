@@ -5,12 +5,12 @@ namespace TodolistBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * todos
+ * Todos
  *
  * @ORM\Table(name="todos")
  * @ORM\Entity(repositoryClass="TodolistBundle\Repository\todosRepository")
  */
-class todos
+class Todos
 {
     /**
      * @var int
