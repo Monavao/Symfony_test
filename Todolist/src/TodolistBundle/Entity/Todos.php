@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Todos
  *
  * @ORM\Table(name="todos")
- * @ORM\Entity(repositoryClass="TodolistBundle\Repository\todosRepository")
+ * @ORM\Entity(repositoryClass="TodolistBundle\Repository\TodosRepository")
  */
 class Todos
 {
@@ -61,7 +61,7 @@ class Todos
      *
      * @ORM\Column(name="createDate", type="datetime")
      */
-    private $createDate;
+    private $creationDate;
 
 
     /**
@@ -195,26 +195,26 @@ class Todos
     }
 
     /**
-     * Set createDate.
+     * Set creationDate.
      *
-     * @param \DateTime $createDate
+     * @param \DateTime $creationDate
      *
      * @return todos
      */
-    public function setCreateDate($createDate)
+    public function setCreationDate($creationDate)
     {
-        $this->createDate = $createDate;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
 
     /**
-     * Get createDate.
+     * Get creationDate.
      *
      * @return \DateTime
      */
-    public function getCreateDate()
+    public function getCreationDate()
     {
-        return $this->createDate;
+        return $this->creationDate;
     }
 }
