@@ -17,3 +17,7 @@ todolist_create:
 todolist_edit:
     path:     todo/edit/{id}
     defaults: { _controller: TodolistBundle:Todo:edit }
+
+todolist_delete:
+    path:     todo/delete/{id}
+    defaults: { _controller: TodolistBundle:Todo:delete }

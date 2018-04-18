@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+	<a class="btn btn-primary" href="{{ path('todolist_list') }}">Back to list</a>
+	<hr>
+	<h2 class="page-header">{{details.name}}</h2>
+	<p>Category: {{details.category}}</p>
+	<p>Priority: {{details.priority}}</p>
+	<p>Deadline: {{details.dueDate|date('d-m-Y H:m')}}</p>
+	<p>Task: {{details.description}}</p>
 {% endblock %}

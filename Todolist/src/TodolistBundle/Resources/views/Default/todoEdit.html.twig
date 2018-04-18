@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+	<h2>Edit Todo</h2>
 
+	{{form_start(createTodoForm)}}
+		<div class="form-control">{{form_widget(createTodoForm.name)}}</div>
+		<div class="form-control">Category: {{form_widget(createTodoForm.category)}}</div>
+		<div class="form-control">{{form_widget(createTodoForm.description)}}</div>
+		<div class="form-control">Priority: {{form_widget(createTodoForm.priority)}}</div>
+		<div class="form-control">Due date: {{form_widget(createTodoForm.due_date)}}</div>
+		<div class="form-control">{{form_widget(createTodoForm.save)}}</div>
+	{{form_end(createTodoForm)}}
 {% endblock %}

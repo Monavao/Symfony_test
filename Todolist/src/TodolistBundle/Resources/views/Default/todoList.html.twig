@@ -21,9 +21,9 @@
 					<th>{{todo.priority}}</th>
 					<th>{{todo.dueDate|date('d-m-Y H:m')}}</th>
 					<th>{{todo.creationDate|date('d-m-Y')}}</th>
-					<th><a href="#" class="btn btn-info">View</a>
-					<a href="#" class="btn btn-success">Edit</a>
-					<a href="#" class="btn btn-danger">Delete</a></th>
+					<th><a href="{{ path('todolist_detail', {'id': todo.id}) }}" class="btn btn-info">View</a>
+					<a href="{{ path('todolist_edit', {'id': todo.id}) }}" class="btn btn-success">Edit</a>
+					<a href="{{ path('todolist_delete', {'id': todo.id}) }}" class="btn btn-danger">Delete</a></th>
 				</tr>
 			{% endfor %}
 		</tbody>

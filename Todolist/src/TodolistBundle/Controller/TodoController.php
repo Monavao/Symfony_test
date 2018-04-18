@@ -22,7 +22,13 @@ class TodoController extends Controller
 
 	public function detailsAction($id)
 	{
-		return $this->render('TodolistBundle:Default:todoDetails.html.twig');
+		$em = $this->getDoctrine()->getManager();
+
+		$details = $em->getRepository('TodolistBundle:Todos')->findOneById($id);
+
+		return $this->render('TodolistBundle:Default:todoDetails.html.twig', array(
+			'details' => $details
+		));
 	}
 
 	public function createAction(Request $request)
@@ -53,10 +59,55 @@ class TodoController extends Controller
 
 	public function editAction(Request $request, $id)
 	{
-		return $this->render('TodolistBundle:Default:todoEdit.html.twig');
+		$em = $this->getDoctrine()->getManager();
+
+		$todo = $em->getRepository('TodolistBundle:Todos')->findOneById($id);
+
+		$todo->setName($todo->getName());
+		$todo->setCategory($todo->getCategory());
+		$todo->setDescription($todo->getDescription());
+		$todo->setPriority($todo->getPriority());
+		$todo->setDueDate($todo->getDueDate());
+		$todo->setCreationDate($todo->getCreationDate());
+
+		$createTodoForm = $this->createForm(TodoCreateType::class, $todo);
+		$createTodoForm->handleRequest($request);
+
+		if($createTodoForm->isSubmitted() && $createTodoForm->isValid())
+		{
+			$name = $createTodoForm['name']->getData();
+			$category = $createTodoForm['category']->getData();
+			$description = $createTodoForm['description']->getData();
+			$priority = $createTodoForm['priority']->getData();
+			$dueDate = $createTodoForm['due_date']->getData();
+			$creationDate = new \DateTime('now');
+
+			$em->flush();
+
+			$this->addFlash('notice', 'Todo updated successfully');
+
+			return $this->redirectToRoute('todolist_list');
+		}
+
+		return $this->render('TodolistBundle:Default:todoEdit.html.twig', array(
+			'createTodoForm' => $createTodoForm->createView()));
 	}
 
-	public function addTodo($name, $category, $description, $priority, $dueDate, $creationDate)
+	public function deleteAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$todo = $em->getRepository('TodolistBundle:Todos')->findOneById($id);
+
+		$em->remove($todo);
+		$em->flush();
+
+		$this->addFlash('notice', 'Todo removed successfully');
+
+		return $this->redirectToRoute('todolist_list');
+	}
+
+	private function addTodo($name, $category, $description, $priority, $dueDate, $creationDate)
 	{
 		$todo = new Todos();
 
@@ -70,5 +121,7 @@ class TodoController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($todo);
 		$em->flush();
+
+		$this->addFlash('notice', 'Todo created successfully');
 	}
 }
