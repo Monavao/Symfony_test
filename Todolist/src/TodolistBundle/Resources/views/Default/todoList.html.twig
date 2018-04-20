@@ -11,6 +11,7 @@
 				<th>Due Date</th>
 				<th>Creation Date</th>
 				<th>Actions</th>
+				<th>Author</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,6 +25,7 @@
 					<th><a href="{{ path('todolist_detail', {'id': todo.id}) }}" class="btn btn-info">View</a>
 					<a href="{{ path('todolist_edit', {'id': todo.id}) }}" class="btn btn-success">Edit</a>
 					<a href="{{ path('todolist_delete', {'id': todo.id}) }}" class="btn btn-danger">Delete</a></th>
+					<th>{{todo.user.username}}</th>
 				</tr>
 			{% endfor %}
 		</tbody>

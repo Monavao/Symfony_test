@@ -5,6 +5,7 @@ namespace TodolistBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use TodolistBundle\Entity\Todos;
+use TodolistBundle\Entity\User;
 use TodolistBundle\Form\TodoCreateType;
 
 class TodoController extends Controller
@@ -33,6 +34,8 @@ class TodoController extends Controller
 
 	public function createAction(Request $request)
 	{
+		$user = $this->getUser();
+
 		$createTodoForm = $this->createForm(TodoCreateType::class, null);
 		$createTodoForm->handleRequest($request);
 
@@ -45,9 +48,7 @@ class TodoController extends Controller
 			$dueDate = $createTodoForm['due_date']->getData();
 			$creationDate = new \DateTime('now');
 
-			$add = $this->addTodo($name, $category, $description, $priority, $dueDate, $creationDate);
-
-			//$request->getFlashBag()->add('success','Todo added');
+			$add = $this->addTodo($name, $category, $description, $priority, $dueDate, $creationDate, $user);
 
 			return $this->redirectToRoute('todolist_list');
 		}
@@ -107,7 +108,7 @@ class TodoController extends Controller
 		return $this->redirectToRoute('todolist_list');
 	}
 
-	private function addTodo($name, $category, $description, $priority, $dueDate, $creationDate)
+	private function addTodo($name, $category, $description, $priority, $dueDate, $creationDate, $user)
 	{
 		$todo = new Todos();
 
@@ -117,6 +118,7 @@ class TodoController extends Controller
 		$todo->setPriority($priority);
 		$todo->setDueDate($dueDate);
 		$todo->setCreationDate($creationDate);
+		$todo->setUser($user);
 
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($todo);
